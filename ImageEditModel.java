@@ -47,9 +47,10 @@ public class ImageEditModel {
         return this.image;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { // TODO: Remove this method, only for testing.
         ImageEditModel editor = new ImageEditModel("blue.jpg");
         Rectangle z = new Rectangle(editor.image.getHeight(), editor.image.getWidth());
+
         System.out.println(editor.image.getRGB(0, 0));
         editor.clearZone(z);
         System.out.println(editor.image.getRGB(0, 0));

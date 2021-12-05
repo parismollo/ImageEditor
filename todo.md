@@ -1,2 +1,4 @@
 - [x] Ex. 1 
-- [ ] Ex. 2
+- [x] Ex. 2 // Requires Testing;
+- [x] Ex. 3
+- [ ] Ex. 4
