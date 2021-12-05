@@ -7,6 +7,27 @@ public class ImageEditView extends JFrame{
     ImagePane imagePane;
     ImageEditModel model;
 
+    ImageEditView(ImageEditModel model) {
+        this.model = model;
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        JMenuBar menuBar = new JMenuBar();
+
+        cutButton = new JButton("cut");
+        undoButton = new JButton("undo");
+        redoButton = new JButton("redo");
+
+        cutButton.setEnabled(false);
+        undoButton.setEnabled(false);
+        redoButton.setEnabled(false);
+
+        menuBar.add(cutButton);
+        menuBar.add(undoButton);
+        menuBar.add(redoButton);
+        setJMenuBar(menuBar);
+        this.imagePane = new ImagePane();
+        this.setContentPane(this.imagePane);
+    }
+
     private class ImagePane extends JPanel {
         Selection selection = new Selection();
 
