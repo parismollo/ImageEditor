@@ -33,16 +33,24 @@ public class ImageEditModel {
             3. Set new pixel value in this.image
 
         */
-        for (int h=0; h < z.getHeight(); h++) {
-            for (int w = 0; w < z.getWidth(); w++) {
+
+
+        // FIXME: When we replace with the (x, y) position of the rectangle, I can't cut again for some reason.
+
+        int topLeftY = (int)z.getY();
+        int topLeftX = (int)z.getX();
+
+        for (int h = 0; h <z.getHeight(); h++) { 
+            for (int w = 0; w <z.getWidth(); w++) { 
                 int newPixelValue = pixels[h][w];
-                this.image.setRGB(w, h, newPixelValue);;
+                this.image.setRGB(topLeftX+w, topLeftY+h, newPixelValue);
             }
         }
         
     }
 
     public void clearZone(Rectangle z) {
+        // System.out.println("[LOG]: Calling clearZone...");
         Color whiteColor = Color.white;
         int srgb = whiteColor.getRGB(); // FIXME: Not sure this will work because the method return a double value.
         int[][] pixels = new int[(int)z.getHeight()][(int)z.getWidth()];
@@ -73,7 +81,6 @@ public class ImageEditModel {
 
         public Coupe(int x, int y, int width, int height, BufferedImage image) {
             this.pixels = new int[height][width];
-            // this.pixels = new int[width][height];
             this.rect = new Rectangle(x, y, width, height);
             for (int i=0; i<image.getHeight(); i++) {
                 for (int j=0; j<image.getWidth(); j++) {
@@ -83,6 +90,8 @@ public class ImageEditModel {
         }
 
         void doit() {
+            // System.out.println("[LOG]: Calling doit...");
+            // System.out.print(rect);
             clearZone(rect);
         }
         void undo() {
@@ -102,6 +111,7 @@ public class ImageEditModel {
         }
 
         public void redo() {
+            System.out.print("[LOG]: Calling redo...");
             c.doit();
         }
     }
