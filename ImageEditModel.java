@@ -1,9 +1,13 @@
 import java.awt.image.BufferedImage;
 import javax.imageio.*;
+import javax.swing.undo.AbstractUndoableEdit;
+import javax.swing.undo.UndoManager;
+
 import java.io.File;
 import java.awt.*;
 public class ImageEditModel {
     BufferedImage image;
+    UndoManager undoManager = new UndoManager();
 
     public ImageEditModel(String imagePath) {
         try {
@@ -13,6 +17,13 @@ public class ImageEditModel {
             // TODO: Raise dialog error.
             e.printStackTrace();
         }   
+    }
+
+    public void saveCut(Rectangle z) {
+        BufferedImage subImage = this.image.getSubimage((int)z.getX(),(int) z.getY(),(int) z.getWidth(),(int) z.getHeight());
+        Coupe coupe =  new Coupe((int)z.getX(),(int) z.getY(),(int) z.getWidth(),(int) z.getHeight(), subImage);
+        coupe.doit();
+        this.undoManager.addEdit(new CutEdit(coupe)); 
     }
 
     public void fillZone(Rectangle z, int[][] pixels) {
@@ -74,6 +85,22 @@ public class ImageEditModel {
         }
         void undo() {
             fillZone(rect, pixels);
+        }
+    }
+
+    public class CutEdit extends AbstractUndoableEdit {
+        Coupe c;
+
+        public CutEdit(Coupe c) {
+            this.c = c;
+        }
+
+        public void undo() {
+            c.undo();
+        }
+
+        public void redo() {
+            c.doit();
         }
     }
 }
