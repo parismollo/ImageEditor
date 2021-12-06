@@ -1,4 +1,8 @@
 - [x] Ex. 1 
 - [x] Ex. 2 // Requires Testing;
 - [x] Ex. 3
-- [ ] Ex. 4
+- [x] Ex. 4
+- [x] Ex. 5
+- [x] Ex. 6
+- [x] Ex. 7
+Bugs to fix!

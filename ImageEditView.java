@@ -47,7 +47,7 @@ public class ImageEditView extends JFrame{
             int a, b, c, d;
             
             public Rectangle getRectangle() {
-                return new Rectangle(a, b, c-a, d-b);
+                return new Rectangle(a, b, Math.abs(c-a), Math.abs(d-b));
             }
 
             public void mousePressed(MouseEvent event) {
@@ -62,7 +62,7 @@ public class ImageEditView extends JFrame{
                 c = event.getX();
                 d = event.getY();
 
-                if(c != this.a && d == this.b) {
+                if(c != this.a && d != this.b) {
                     ImageEditView.this.cutButton.setEnabled(true);
                     ImageEditView.ImagePane.this.repaint();
                 }

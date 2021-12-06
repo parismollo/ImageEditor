@@ -2,7 +2,7 @@ import java.awt.EventQueue;
 
 public class Launcher {
     public static void main(String[] args) {
-        ImageEditModel model = new ImageEditModel("image.jpg");
+        ImageEditModel model = new ImageEditModel("blue.png");
         // FIXME
         EventQueue.invokeLater( () ->
             {
