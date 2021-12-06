@@ -107,11 +107,13 @@ public class ImageEditModel {
         }
 
         public void undo() {
+            super.undo();
             c.undo();
         }
 
         public void redo() {
-            System.out.print("[LOG]: Calling redo...");
+            // System.out.print("[LOG]: Calling redo...");
+            super.redo();
             c.doit();
         }
     }

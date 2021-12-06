@@ -25,7 +25,7 @@ public class ImageEditView extends JFrame{
                 imagePane.repaint();
                 cutButton.setEnabled(false);
                 undoButton.setEnabled(true);
-                redoButton.setEnabled(true);
+                // redoButton.setEnabled(false);
             }
         );
 
@@ -33,6 +33,11 @@ public class ImageEditView extends JFrame{
             (ActionEvent e) -> {
                 if (model.undoManager.canUndo()) {
                     model.undoManager.undo();
+                    
+                    if (!model.undoManager.canUndo()) {
+                        undoButton.setEnabled(false);
+                    }
+                    redoButton.setEnabled(true);
                     imagePane.repaint();
                     // TODO: add setEnable true to cut button?
                 }
@@ -42,10 +47,14 @@ public class ImageEditView extends JFrame{
 
         redoButton.addActionListener(
             (ActionEvent e) -> {
-                if (model.undoManager.canRedo()) {
+                if (model.undoManager.canRedo()) { // FIXME: this is not working....
                     model.undoManager.redo();
+                    undoButton.setEnabled(true);
+                   
+                    if(!model.undoManager.canRedo()) {
+                        redoButton.setEnabled(false);
+                    }
                     imagePane.repaint();
-                    // TODO: add setEnable true to cut button?
                 }
                 
             }
