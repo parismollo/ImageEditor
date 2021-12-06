@@ -36,7 +36,7 @@ public class ImageEditModel {
         for (int h=0; h < z.getHeight(); h++) {
             for (int w = 0; w < z.getWidth(); w++) {
                 int newPixelValue = pixels[h][w];
-                this.image.setRGB(h, w, newPixelValue);;
+                this.image.setRGB(w, h, newPixelValue);;
             }
         }
         
@@ -72,10 +72,12 @@ public class ImageEditModel {
         int[][] pixels;
 
         public Coupe(int x, int y, int width, int height, BufferedImage image) {
+            this.pixels = new int[height][width];
+            // this.pixels = new int[width][height];
             this.rect = new Rectangle(x, y, width, height);
             for (int i=0; i<image.getHeight(); i++) {
                 for (int j=0; j<image.getWidth(); j++) {
-                    pixels[i][j] = image.getRGB(i, j);
+                    pixels[i][j] = image.getRGB(j, i);
                 }
              }
         }

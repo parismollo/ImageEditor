@@ -7,7 +7,7 @@ public class ImageEditView extends JFrame{
     ImagePane imagePane;
     ImageEditModel model;
 
-    ImageEditView(ImageEditModel model) {
+    public ImageEditView(ImageEditModel model) {
         this.model = model;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         JMenuBar menuBar = new JMenuBar();
@@ -16,10 +16,41 @@ public class ImageEditView extends JFrame{
         undoButton = new JButton("undo");
         redoButton = new JButton("redo");
 
-        cutButton.setEnabled(false);
         undoButton.setEnabled(false);
         redoButton.setEnabled(false);
 
+        cutButton.addActionListener(
+            (ActionEvent e) -> {
+                model.saveCut(imagePane.selection.getRectangle());
+                imagePane.repaint();
+                cutButton.setEnabled(false);
+                undoButton.setEnabled(true);
+                redoButton.setEnabled(true);
+            }
+        );
+
+        undoButton.addActionListener(
+            (ActionEvent e) -> {
+                if (model.undoManager.canUndo()) {
+                    model.undoManager.undo();
+                    imagePane.repaint();
+                    // TODO: add setEnable true to cut button?
+                }
+                
+            }
+        );
+
+        redoButton.addActionListener(
+            (ActionEvent e) -> {
+                if (model.undoManager.canRedo()) {
+                    model.undoManager.redo();
+                    imagePane.repaint();
+                    // TODO: add setEnable true to cut button?
+                }
+                
+            }
+        );
+        // cutButton.setEnabled(false);
         menuBar.add(cutButton);
         menuBar.add(undoButton);
         menuBar.add(redoButton);
