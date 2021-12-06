@@ -5,4 +5,4 @@
 - [x] Ex. 5
 - [x] Ex. 6
 - [x] Ex. 7
-Bugs to fix!
+- [ ] Ex. 8

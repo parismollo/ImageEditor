@@ -47,12 +47,33 @@ public class ImageEditModel {
         return this.image;
     }
 
-    public static void main(String[] args) { // TODO: Remove this method, only for testing.
-        ImageEditModel editor = new ImageEditModel("blue.jpg");
-        Rectangle z = new Rectangle(editor.image.getHeight(), editor.image.getWidth());
+    // public static void main(String[] args) { // TODO: Remove this method, only for testing.
+    //     ImageEditModel editor = new ImageEditModel("blue.jpg");
+    //     Rectangle z = new Rectangle(editor.image.getHeight(), editor.image.getWidth());
 
-        System.out.println(editor.image.getRGB(0, 0));
-        editor.clearZone(z);
-        System.out.println(editor.image.getRGB(0, 0));
+    //     System.out.println(editor.image.getRGB(0, 0));
+    //     editor.clearZone(z);
+    //     System.out.println(editor.image.getRGB(0, 0));
+    // }
+
+    public class Coupe {
+        Rectangle rect;
+        int[][] pixels;
+
+        public Coupe(int x, int y, int width, int height, BufferedImage image) {
+            this.rect = new Rectangle(x, y, width, height);
+            for (int i=0; i<image.getHeight(); i++) {
+                for (int j=0; j<image.getWidth(); j++) {
+                    pixels[i][j] = image.getRGB(i, j);
+                }
+             }
+        }
+
+        void doit() {
+            clearZone(rect);
+        }
+        void undo() {
+            fillZone(rect, pixels);
+        }
     }
 }
