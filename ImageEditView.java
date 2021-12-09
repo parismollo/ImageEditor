@@ -83,7 +83,7 @@ public class ImageEditView extends JFrame{
             ((Graphics2D) g).draw(selection.getRectangle());
         }
 
-        public class Selection extends MouseAdapter implements MouseMotionListener {
+        public class Selection extends MouseAdapter {
             int a, b, c, d;
             
             public Rectangle getRectangle() {
